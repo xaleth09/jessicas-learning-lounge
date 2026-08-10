@@ -70,7 +70,7 @@ export function HomePage() {
               <span className="text-2xl">✨</span>
               <div>
                 <div className="text-gray-900 text-lg" style={{ fontFamily: "'Fraunces', serif", fontWeight: 600 }}>Jessica's Learning Lounge</div>
-                <div className="text-xs text-gray-500 -mt-1">Math Tutoring • 6th–12th Grade</div>
+                <div className="text-xs text-gray-500 -mt-1">Academic Coach • 6th–12th Grade</div>
               </div>
             </div>
 
