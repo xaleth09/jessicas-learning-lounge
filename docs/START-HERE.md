@@ -65,6 +65,32 @@ makes everything after it better.
 
 ---
 
+## If you don't like how it's working, tell it
+
+Robbi set this up guessing at what you'd want, before you'd tried it once. You
+get the final say — if something about how it talks to you is annoying, say so
+and it'll change. Things like:
+
+> Stop asking me every time, just make the change.
+
+> Show me what you're actually changing, I want to see it.
+
+> Give me a few ideas at once instead of one.
+
+> You're explaining too much. Keep it short.
+
+> Be blunter with me.
+
+It'll remember. Not just for that conversation — it writes it down, so next week
+in a brand new chat it still works the way you asked.
+
+The only things it'll hold its ground on are ones that protect you: it won't
+make up reviews or credentials for you, and it'll send you to Robbi for anything
+neither of you can check. It should tell you why in plain terms — if it ever
+starts quoting rules at you instead, that's worth mentioning to Robbi.
+
+---
+
 ## Before you say yes
 
 For anything more than a small wording change, it'll tell you what it's about to
