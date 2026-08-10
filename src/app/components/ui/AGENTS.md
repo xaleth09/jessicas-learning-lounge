@@ -14,7 +14,7 @@ require it, it doesn't — do one of these instead:
 - **Restyle one instance.** Pass different classes at the call site in
   `HomePage.tsx`. That's how every custom-looking button on the page already
   works: `<Button className="bg-[#F9E87B] rounded-full ..." />`.
-- **Need genuinely different behavior?** Stop and tell Jessica this one is worth
+- **Need genuinely different behavior?** Stop and tell Kat this one is worth
   having Robbi look at.
 
 Reading these files to understand what a component accepts is fine and

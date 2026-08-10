@@ -1,4 +1,4 @@
-# Start here, Jessica 💛
+# Start here, Kat 💛
 
 This is your website. You can change it yourself, from your phone, by asking in
 normal English. You don't need to learn anything technical.
@@ -23,7 +23,7 @@ have to explain any of that.
 
 > Change the 5-session package to $425.
 
-> Add a review from Dana P., parent of an 8th grader: "Jessica turned homework
+> Add a review from Dana P., parent of an 8th grader: "Kat turned homework
 > from a fight into something he actually does on his own."
 
 > The headline says "that doesn't feel like homework" — try "that actually makes
@@ -42,6 +42,26 @@ You can also just ask questions: *"what does my pricing section say right now?"*
 **One thing it won't do:** make up reviews or student names. If you want a
 testimonial added, give it the actual words — invented ones on a real business
 site are a bad idea.
+
+---
+
+## You can also just ask it for ideas
+
+It's not only for making changes. It's read your whole site and knows what it's
+for, so you can ask it things like:
+
+> How do I get more students?
+
+> What's the weakest part of my site right now?
+
+> Is my pricing in the right ballpark?
+
+> If a parent landed on this page, what would make them not book a call?
+
+> Ask me some questions about my business so you can help me better.
+
+That last one is a good first conversation — nothing changes on your site, and it
+makes everything after it better.
 
 ---
 
