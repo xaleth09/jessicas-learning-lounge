@@ -5,7 +5,33 @@
 **Jessica** owns this site — the marketing page for her tutoring business. She's
 not a programmer and isn't trying to become one. Assume she's never read code.
 
-**Robbi** built it and handles the technical side.
+She's usually on her phone, in the ChatGPT app. Keep your replies short enough to
+read on a phone screen. No long lists, no walls of text.
+
+**Robbi** built the site and handles the technical side.
+
+## What you can and can't do here
+
+You're reading this repo through the GitHub connector. You can **read files and
+commit changes to `main`.** That's it.
+
+**You have no terminal.** You can't run builds, tests, linters, or git commands.
+Don't offer to, and don't tell her to run anything — she has no way to either.
+
+**This means you cannot check your own work.** Nothing catches a mistake between
+you committing and it being live. So:
+
+- Keep edits small and surgical. Change the specific thing she asked about and
+  nothing else.
+- Read the surrounding lines before you edit, and make sure the JSX brackets,
+  quotes, and tags you're touching still balance afterward.
+- When in doubt, do less.
+
+There is one net behind you: a GitHub Action builds the site after every commit,
+and Cloudflare only publishes if the build succeeds. If you break something, the
+live site stays on the last working version and Robbi gets an email. That
+protects the site — it does **not** get her change published, and she'll be left
+wondering why nothing happened. Treat it as a backstop, not a safety net.
 
 ## How to talk to her
 
@@ -22,40 +48,31 @@ This is the part that matters most.
   "flex or grid?"
 - If something's a bad idea, say so in one sentence and offer what does work.
 
-## Making changes
+## Publishing a change
 
-Change as little as possible and match the surrounding style — this page came
-out of a design tool and the patterns are consistent.
+Commit the edited file straight to `main`. Write the commit message as a human
+sentence — `Update 5-session package to $425`, not `fix: pricing`.
 
-Run `npm run build` before you push. It takes under a second and catches typos
-that would otherwise fail silently — Cloudflare would reject the broken build,
-her change would just never appear, and she'd have no idea why. (A pre-existing
-`@import must precede all other statements` warning is normal; ignore it.) If it
-fails, fix it or put it back — don't push it.
+Cloudflare rebuilds and publishes automatically. Tell her:
 
-For anything bigger than a wording or price tweak, tell her what you're about to
-change before you publish it. Her changes go straight to the live site with no
-one else reviewing them.
+> Done — give it about a minute, then refresh
+> https://jessicas-learning-lounge.pages.dev
 
-Then:
+For anything bigger than a wording or price tweak, say what you're about to
+change before you commit it. Her changes go straight to the live site with no one
+else reviewing them, and you can't test them first — so that sentence is the only
+review that happens.
 
-```bash
-git add -A && git commit -m "<plain description>" && git push origin main
-```
-
-Commit messages should read like a human sentence — `Update 5-session package to
-$425`. Tell her it's live and to refresh
-https://jessicas-learning-lounge.pages.dev in about a minute.
-
-To undo something already published: `git revert --no-edit <hash>`, then build
-and push. Never `reset --hard`, never force-push.
+**To undo something already published:** read the file as it was in the commit
+before the change, and commit that version back with a message like
+`Put pricing back to $400`. Never rewrite or force over existing history.
 
 ## Things to hand to Robbi instead
 
 Say *"that one's worth having Robbi look at"* and stop:
 
-- Installing or upgrading anything (`npm install`, `package.json`)
-- `vite.config.js`, `postcss.config.js`, `src/styles/`, `.github/`
+- Anything in `package.json`, `vite.config.js`, `postcss.config.js`,
+  `src/styles/`, or `.github/`
 - Anything in `src/app/components/ui/` (see the note in that folder)
 - Making the contact form actually send email — see below
 - Domain, DNS, Cloudflare, analytics, payments, booking, logins
@@ -69,8 +86,8 @@ given you the words, ask her for them.
 
 Essentially everything she'll want to change is in
 `src/app/components/HomePage.tsx` — one long page, top to bottom, in screen
-order. Each section starts with a comment marker; search for the marker, not a
-line number.
+order. Each section starts with a comment marker; find the marker rather than
+relying on a line number.
 
 `{/* Minimal Navigation */}` · `{/* Hero */}` · `{/* About Jessica */}` ·
 `{/* What Makes This Different */}` · `{/* Math Topics */}` ·
@@ -80,29 +97,29 @@ line number.
 Stay inside the existing palette — yellow `#F9E87B` (primary accent), mint
 `#B5EAD7`, pink `#FECDD3`, lavender `#E9D5FF`, peach `#FED7AA`. Headings are
 Fraunces, body is Nunito, both applied inline. Cards are rounded with a `border-2`
-pastel edge, buttons are `rounded-full`. It's all documented in a comment at the
-top of `HomePage.tsx`.
+pastel edge, buttons are `rounded-full`. It's documented in a comment at the top
+of `HomePage.tsx`.
 
-Most of her visitors are parents on phones — if you change a layout, check the
-mobile version still reads well.
+Most of her visitors are parents on phones. Classes like `md:grid-cols-3` control
+what happens on bigger screens — if you change a layout, make sure it still reads
+well stacked on a narrow screen.
 
 ## Known issues
 
 **The contact form doesn't send anything.** It shows "Got it! I'll get back to
-you within 24 hours" and then `console.log`s the message. Real inquiries are
-being lost. If it comes up, tell her plainly — the email link below the form does
-work — and hand the fix to Robbi; it needs a service set up outside this repo.
+you within 24 hours" and then throws the message away. Real inquiries are being
+lost. If it comes up, tell her plainly — the email link below the form does work
+— and hand the fix to Robbi; it needs a service set up outside this repo.
 
 **`jessicaslearninglounge.com` doesn't resolve**, though the page copy uses that
 address. The site is only at the `pages.dev` URL. Also Robbi's.
 
+**The tagline is inconsistent** — the top of the page says "Academic Coach •
+6th–12th Grade" and the footer still says "Math Tutoring • 6th–12th Grade." Worth
+mentioning to her if it comes up; it's a one-word fix either direction.
+
 ## Technical notes
 
-Vite 8 · React 19 · Tailwind v4 · shadcn/ui. No tests. Tailwind v4 is configured
-in CSS under `src/styles/` — there's no `tailwind.config.js` and shouldn't be.
-
-If `npm run build` fails on a missing module, run `npm install` first — that case
-is fine and isn't the same as adding a dependency.
-
-Cloudflare Pages auto-deploys from `main` (`npm run build` → `dist/`). A failed
-build leaves the previous deployment live, so the site won't go down.
+Vite 8 · React 19 · Tailwind v4 · shadcn/ui, deployed by Cloudflare Pages from
+`main`. Tailwind v4 is configured in CSS under `src/styles/` — there's no
+`tailwind.config.js` and shouldn't be. No test suite.

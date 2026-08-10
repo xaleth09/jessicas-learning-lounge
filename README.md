@@ -11,6 +11,11 @@ Marketing site for Jessica's Learning Lounge — 6th–12th grade.
 **AI agents:** read [AGENTS.md](AGENTS.md) before making changes.
 `src/app/components/ui/` has its own — those files are off limits.
 
+Jessica edits this site from the ChatGPT mobile app via the GitHub connector,
+committing straight to `main`. That agent has no shell, so it can't verify its
+own changes — [the build check](.github/workflows/build-check.yml) runs
+post-push and is the only verification in the loop.
+
 ---
 
 ## Developers

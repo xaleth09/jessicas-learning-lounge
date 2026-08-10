@@ -1,7 +1,7 @@
 # Start here, Jessica 💛
 
-This is your website. You can change it yourself, by asking, in normal English.
-You don't need to learn anything technical.
+This is your website. You can change it yourself, from your phone, by asking in
+normal English. You don't need to learn anything technical.
 
 **Your site:** https://jessicas-learning-lounge.pages.dev
 
@@ -9,12 +9,13 @@ You don't need to learn anything technical.
 
 ## How to change something
 
-1. Go to **[chatgpt.com/codex](https://chatgpt.com/codex)**
-2. Pick **jessicas-learning-lounge**
+1. Open **ChatGPT** on your phone
+2. Start a new chat in your **Learning Lounge** project
 3. Type what you want, like you'd text a friend who happens to build websites
 4. Wait about a minute, refresh your site
 
-That's it.
+That's it. It already knows where your website lives and how it works — you don't
+have to explain any of that.
 
 ---
 
@@ -30,8 +31,6 @@ That's it.
 
 > Add ACT prep to the list of subjects.
 
-> Swap the photo of me for this one. [attach]
-
 > The pricing cards look cramped on my phone. Can you fix that?
 
 You don't have to be precise. *"That yellow button at the top, make it say
@@ -46,6 +45,17 @@ site are a bad idea.
 
 ---
 
+## Before you say yes
+
+For anything more than a small wording change, it'll tell you what it's about to
+do first. **Read that bit.** It can't preview the change or test it — so that
+sentence is the only check between your idea and your live website.
+
+If it's not what you meant, just say so: *"no, only change the price, leave the
+label alone."*
+
+---
+
 ## Undoing things
 
 Just say it:
@@ -54,23 +64,27 @@ Just say it:
 
 > Put the price back to what it was.
 
-> Undo everything from today.
+> Change the headline back to what it said before.
 
-All of these work. Every version of your site is saved permanently, so nothing
-you do is ever really lost — the worst case is you say "undo that" and it goes
-back.
+Every version of your site is saved permanently, so nothing you do is ever really
+lost.
 
-If your site looks broken: refresh first (usually it's your browser showing an
-old copy), then try *"put it back to the last version that worked."* If two tries
-don't fix it, text Robbi rather than keep going.
+If your site looks broken: **refresh first** — usually your phone is just showing
+you a saved copy. Then try *"put it back to how it was before my last change."*
+If two tries don't fix it, text Robbi rather than keep going.
+
+**If your change just doesn't show up** after a few minutes, that usually means
+something went wrong on the way out. Your live site is fine — it's still showing
+the old version — but the change didn't make it. Tell Robbi; he gets an alert
+when this happens.
 
 ---
 
 ## When to ask Robbi instead
 
 Anything about your domain name, email, payments, or booking. And whenever it
-says *"that one's worth having Robbi look at"* — that's it staying in its lane
-on purpose, not being unhelpful.
+says *"that one's worth having Robbi look at"* — that's it staying in its lane on
+purpose, not being unhelpful.
 
 ---
 
