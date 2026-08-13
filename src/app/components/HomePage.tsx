@@ -1,3 +1,4 @@
+import { useState, type FormEvent } from "react";
 import { Button } from "./ui/button";
 import {
   ArrowRight,
@@ -5,6 +6,7 @@ import {
   CheckCircle,
   Mail,
   Smile,
+  X,
 } from "lucide-react";
 
 // Soft pastel palette (used throughout):
@@ -16,7 +18,61 @@ import {
 
 export function HomePage() {
   const contactEmail = "jessicaslearninglounge@gmail.com";
-  const contactHref = "mailto:jessicaslearninglounge@gmail.com?subject=Free%20Consultation%20Request";
+  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
+  const [consultationForm, setConsultationForm] = useState({
+    parentName: "",
+    parentEmail: "",
+    studentName: "",
+    phone: "",
+    grade: "",
+    supportType: "",
+    goals: "",
+  });
+
+  const updateConsultationField = (
+    field: keyof typeof consultationForm,
+    value: string,
+  ) => {
+    setConsultationForm((current) => ({ ...current, [field]: value }));
+  };
+
+  const handleConsultationSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const subject =
+      "✨ JLL Consultation: " +
+      consultationForm.studentName +
+      " — " +
+      consultationForm.grade;
+
+    const body = [
+      "Hi Jessica!",
+      "",
+      "I’m interested in a free consultation for my student.",
+      "",
+      "Parent’s name: " + consultationForm.parentName,
+      "Parent’s email: " + consultationForm.parentEmail,
+      "Student’s name: " + consultationForm.studentName,
+      "Phone number: " + consultationForm.phone,
+      "Grade: " + consultationForm.grade,
+      "Support preference: " + consultationForm.supportType,
+      "",
+      "Goals & what’s going on:",
+      consultationForm.goals,
+      "",
+      "Sent from Jessica’s Learning Lounge",
+    ].join("\n");
+
+    window.location.href =
+      "mailto:" +
+      contactEmail +
+      "?subject=" +
+      encodeURIComponent(subject) +
+      "&body=" +
+      encodeURIComponent(body);
+
+    setIsConsultationOpen(false);
+  };
 
   return (
     <div className="w-full bg-[#FFFEF9]" style={{ fontFamily: "'Nunito', sans-serif" }}>
@@ -40,14 +96,13 @@ export function HomePage() {
             </div>
 
             <Button
-              asChild
+              type="button"
+              onClick={() => setIsConsultationOpen(true)}
               className="bg-[#F9E87B] text-gray-900 hover:bg-[#F5DF60] rounded-full px-4 sm:px-6 shadow-md hover:shadow-lg transition-all border border-[#EDD84A]/30 flex-shrink-0"
               style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700 }}
             >
-              <a href={contactHref}>
-                <span className="hidden sm:inline">Book a Free Consultation</span>
-                <span className="sm:hidden">Free Consultation</span>
-              </a>
+              <span className="hidden sm:inline">Book a Free Consultation</span>
+              <span className="sm:hidden">Free Consultation</span>
             </Button>
           </div>
         </div>
@@ -82,15 +137,14 @@ export function HomePage() {
 
               <div className="flex flex-wrap gap-4">
                 <Button
-                  asChild
+                  type="button"
+                  onClick={() => setIsConsultationOpen(true)}
                   size="lg"
                   className="bg-[#F9E87B] text-gray-900 hover:bg-[#F5DF60] rounded-full px-8 text-lg shadow-md hover:shadow-lg transition-all border border-[#EDD84A]/30"
                   style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700 }}
                 >
-                  <a href={contactHref}>
-                    Book a Free Consultation
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </a>
+                  Book a Free Consultation
+                  <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
 
                 <Button
@@ -343,21 +397,20 @@ export function HomePage() {
               Let’s talk about what your student needs
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto mb-8">
-              Email me with your student’s grade, current classes, goals, and whether
-              you prefer in-person or virtual support. We’ll start with a friendly,
-              no-pressure conversation.
+              Complete the short consultation form and your email app will open with
+              everything filled in. Review the message, press send, and we’ll start
+              with a friendly, no-pressure conversation.
             </p>
 
             <Button
-              asChild
+              type="button"
+              onClick={() => setIsConsultationOpen(true)}
               size="lg"
               className="bg-[#F9E87B] text-gray-900 hover:bg-[#F5DF60] rounded-full px-8 text-lg shadow-md hover:shadow-lg transition-all border border-[#EDD84A]/30"
               style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700 }}
             >
-              <a href={contactHref}>
-                Book a Free Consultation
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </a>
+              Book a Free Consultation
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
 
             <a
@@ -370,6 +423,178 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Consultation Modal */}
+      {isConsultationOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-gray-950/60 backdrop-blur-sm px-4 py-6 flex items-center justify-center"
+          onClick={() => setIsConsultationOpen(false)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="consultation-title"
+            className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto bg-[#FFFEF9] rounded-3xl shadow-2xl border-2 border-[#F9E87B] p-6 sm:p-9"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setIsConsultationOpen(false)}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:text-gray-900 hover:border-gray-300"
+              aria-label="Close consultation form"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="pr-10 mb-7">
+              <p className="text-sm text-[#3DAA7A] uppercase tracking-wider mb-2" style={{ fontWeight: 800 }}>
+                Free Consultation
+              </p>
+              <h2
+                id="consultation-title"
+                className="text-3xl sm:text-4xl text-gray-900 mb-3"
+                style={{ fontFamily: "'Fraunces', serif", fontWeight: 700 }}
+              >
+                Tell me about your student
+              </h2>
+              <p className="text-gray-600">
+                Your email app will open with these details filled in. Review the
+                message and press send when you’re ready.
+              </p>
+            </div>
+
+            <form onSubmit={handleConsultationSubmit} className="space-y-5">
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label htmlFor="parent-name" className="block text-sm text-gray-800 mb-2" style={{ fontWeight: 700 }}>
+                    Parent’s Name
+                  </label>
+                  <input
+                    id="parent-name"
+                    required
+                    autoComplete="name"
+                    value={consultationForm.parentName}
+                    onChange={(event) => updateConsultationField("parentName", event.target.value)}
+                    className="w-full rounded-xl border-2 border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none focus:border-[#F9E87B]"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="parent-email" className="block text-sm text-gray-800 mb-2" style={{ fontWeight: 700 }}>
+                    Parent’s Email
+                  </label>
+                  <input
+                    id="parent-email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    value={consultationForm.parentEmail}
+                    onChange={(event) => updateConsultationField("parentEmail", event.target.value)}
+                    className="w-full rounded-xl border-2 border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none focus:border-[#F9E87B]"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="student-name" className="block text-sm text-gray-800 mb-2" style={{ fontWeight: 700 }}>
+                    Student’s Name
+                  </label>
+                  <input
+                    id="student-name"
+                    required
+                    value={consultationForm.studentName}
+                    onChange={(event) => updateConsultationField("studentName", event.target.value)}
+                    className="w-full rounded-xl border-2 border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none focus:border-[#F9E87B]"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm text-gray-800 mb-2" style={{ fontWeight: 700 }}>
+                    Phone Number
+                  </label>
+                  <input
+                    id="phone"
+                    type="tel"
+                    required
+                    autoComplete="tel"
+                    value={consultationForm.phone}
+                    onChange={(event) => updateConsultationField("phone", event.target.value)}
+                    className="w-full rounded-xl border-2 border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none focus:border-[#F9E87B]"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="grade" className="block text-sm text-gray-800 mb-2" style={{ fontWeight: 700 }}>
+                    Student’s Grade
+                  </label>
+                  <select
+                    id="grade"
+                    required
+                    value={consultationForm.grade}
+                    onChange={(event) => updateConsultationField("grade", event.target.value)}
+                    className="w-full rounded-xl border-2 border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none focus:border-[#F9E87B]"
+                  >
+                    <option value="">Select a grade</option>
+                    <option value="6th Grade">6th Grade</option>
+                    <option value="7th Grade">7th Grade</option>
+                    <option value="8th Grade">8th Grade</option>
+                    <option value="9th Grade">9th Grade</option>
+                    <option value="10th Grade">10th Grade</option>
+                    <option value="11th Grade">11th Grade</option>
+                    <option value="12th Grade">12th Grade</option>
+                    <option value="College or Adult">College or Adult</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="support-type" className="block text-sm text-gray-800 mb-2" style={{ fontWeight: 700 }}>
+                    Support Preference
+                  </label>
+                  <select
+                    id="support-type"
+                    required
+                    value={consultationForm.supportType}
+                    onChange={(event) => updateConsultationField("supportType", event.target.value)}
+                    className="w-full rounded-xl border-2 border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none focus:border-[#F9E87B]"
+                  >
+                    <option value="">Choose an option</option>
+                    <option value="In-Person">In-Person</option>
+                    <option value="Virtual">Virtual</option>
+                    <option value="Open to Either">Open to Either</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="goals" className="block text-sm text-gray-800 mb-2" style={{ fontWeight: 700 }}>
+                  Goals & What’s Going On
+                </label>
+                <textarea
+                  id="goals"
+                  required
+                  rows={5}
+                  placeholder="What is your student working toward? Where do they feel stuck? Share any upcoming tests, goals, or concerns."
+                  value={consultationForm.goals}
+                  onChange={(event) => updateConsultationField("goals", event.target.value)}
+                  className="w-full rounded-xl border-2 border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none focus:border-[#F9E87B] resize-y"
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full bg-[#F9E87B] text-gray-900 hover:bg-[#F5DF60] rounded-full py-6 text-lg shadow-md border border-[#EDD84A]/30"
+                style={{ fontWeight: 800 }}
+              >
+                Open My Email App
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+
+              <p className="text-xs text-center text-gray-500">
+                Nothing is sent until you review the email and press Send.
+              </p>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-300 py-12 px-6">
