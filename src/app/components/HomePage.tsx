@@ -63,13 +63,29 @@ export function HomePage() {
       "Sent from Jessica’s Learning Lounge",
     ].join("\n");
 
-    window.location.href =
-      "mailto:" +
-      contactEmail +
-      "?subject=" +
-      encodeURIComponent(subject) +
-      "&body=" +
-      encodeURIComponent(body);
+    const isMobileDevice = /Android|iPhone|iPad|iPod/i.test(
+      navigator.userAgent,
+    );
+
+    if (isMobileDevice) {
+      window.location.href =
+        "mailto:" +
+        contactEmail +
+        "?subject=" +
+        encodeURIComponent(subject) +
+        "&body=" +
+        encodeURIComponent(body);
+    } else {
+      const gmailComposeUrl =
+        "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+        encodeURIComponent(contactEmail) +
+        "&su=" +
+        encodeURIComponent(subject) +
+        "&body=" +
+        encodeURIComponent(body);
+
+      window.open(gmailComposeUrl, "_blank", "noopener,noreferrer");
+    }
 
     setIsConsultationOpen(false);
   };
@@ -584,11 +600,12 @@ export function HomePage() {
                 className="w-full bg-[#F9E87B] text-gray-900 hover:bg-[#F5DF60] rounded-full py-6 text-lg shadow-md border border-[#EDD84A]/30"
                 style={{ fontWeight: 800 }}
               >
-                Open My Email App
+                Continue to Email
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
 
               <p className="text-xs text-center text-gray-500">
+                On a computer, this opens Gmail. On mobile, it opens your email app.
                 Nothing is sent until you review the email and press Send.
               </p>
             </form>
